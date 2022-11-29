@@ -8,8 +8,8 @@ def evaluate(predicts):
     c_count = 0
 
     for predict in predicts:
-        if predict == "M": m_count += 1
-        elif predict == "F": f_count += 1
+        if predict == "F": m_count += 1
+        elif predict == "M": f_count += 1
         elif predict == "C": c_count += 1
 
     max_v = max(m_count, f_count, c_count)
@@ -18,9 +18,10 @@ def evaluate(predicts):
     elif c_count == max_v: return "C"
 
 def strix(wav):
-    m_count = 0
-    f_count = 0
-    c_count = 0
+    counter = {}
+    counter["M"] = 0
+    counter["F"] = 0
+    counter["C"] = 0
 
     d.seperation(wav)
     speechs = os.listdir("./sep/")
@@ -38,15 +39,18 @@ def strix(wav):
         for item in value:
             predict_list.append(vc.voice_classify("./sep/" + item))
         
-        if evaluate(predict_list) == "M": m_count += 1
-        elif evaluate(predict_list) == "F": f_count += 1
-        elif evaluate(predict_list) == "C": c_count += 1
+        total_predict = evaluate(predict_list)
+        if total_predict == "M": counter["M"] += 1
+        elif total_predict == "F": counter["F"] += 1
+        elif total_predict == "C": counter["C"] += 1
 
-    return m_count, f_count, c_count
+    return counter
 
 def main():
     wav_path = "./test/audio.wav"
-    print(strix(wav_path))
+    
+    for key, value in strix(wav_path):
+        print(key + ":", value)
     pass
 
 if __name__ == "__main__":

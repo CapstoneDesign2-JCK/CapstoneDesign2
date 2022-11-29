@@ -1,3 +1,4 @@
-./tmp
-./sep
-./gitignore
+tmp
+sep
+.gitignore
+test

@@ -19,39 +19,36 @@ def evaluate(predicts):
 
 def strix(wav):
     counter = {}
+    spk_dict = {}
     counter["M"] = 0
     counter["F"] = 0
     counter["C"] = 0
 
-    d.seperation(wav)
-    speechs = os.listdir("./sep/")
+    sep_dir = "../sep/"
+    #d.seperation(wav, sep_dir)
+    speechs = os.listdir(sep_dir)
 
-    spk_dict = {}
     for speech in speechs:
-        if speech[8:10] not in spk_dict:
-            spk = speech[8:10]
-            spk_dict[spk] = [speech]
-        else:
-            spk_dict[spk].append(speech)
+        spk_id = speech[8:10]
+        if spk_id not in spk_dict:
+            spk_dict[spk_id] = [sep_dir + speech]
+        else: spk_dict[spk_id].append(sep_dir + speech)
 
-    for _, value in spk_dict:
-        predict_list = []
-        for item in value:
-            predict_list.append(vc.voice_classify("./sep/" + item))
-        
-        total_predict = evaluate(predict_list)
-        if total_predict == "M": counter["M"] += 1
-        elif total_predict == "F": counter["F"] += 1
-        elif total_predict == "C": counter["C"] += 1
+    for key, voices in spk_dict.items():
+        predicts = []
+        for voice in voices:
+            predicts.append(vc.voice_classify(voice))
+        counter[evaluate(predicts)] += 1
 
     return counter
 
 def main():
-    wav_path = "./test/audio.wav"
+    wav_path = "../test/audio.wav"
+
+    result = strix(wav_path)
     
-    for key, value in strix(wav_path):
-        print(key + ":", value)
-    pass
+    for key, value in result.items():
+        print(key, value)
 
 if __name__ == "__main__":
     main()

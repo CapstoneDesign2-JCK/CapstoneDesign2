@@ -7,7 +7,7 @@
 # #################################
 
 # pretrain folders:
-pretrained_path: ./model
+pretrained_path: ../model
 
 # Model parameters
 n_mels: 23

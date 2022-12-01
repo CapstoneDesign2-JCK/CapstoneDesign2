@@ -25,6 +25,12 @@ def evaluate(predicts):
     elif f_count == max_v: return "F"
     elif c_count == max_v: return "C"
 
+def clear_directory(path):
+    files = os.listdir(path)
+    for file in files:
+        if file.split('.')[-1] == "wav":
+            os.remove(path + file)
+
 def strix(wav):
     counter = {}
     spk_dict = {}
@@ -32,11 +38,16 @@ def strix(wav):
     counter["F"] = 0
     counter["C"] = 0
 
+    sep_dir = "../sep/"
+    sep_save = "../sep_result/"
+
+    file_name = wav.split("/")[-1].split(".")[0]
+
     createDirectory(sep_dir)
     createDirectory(sep_save)
 
-    sep_dir = "../sep/"
-    sep_save = "../sep_result/"
+    clear_directory(sep_dir)
+
     d.seperation(wav, sep_dir)
     speechs = os.listdir(sep_dir)
 
@@ -55,13 +66,13 @@ def strix(wav):
     results = os.listdir(sep_save)
     next_num = "0"
     if len(results) != 0:
-        next_num = int(results[-1])
+        next_num = int(results[-1].split("_")[0])
         next_num += 1
         next_num = str(next_num)
 
-    os.mkdir(sep_save + next_num)
+    os.mkdir(sep_save + next_num + "_" + file_name)
     for speech in speechs:
-        shutil.move(sep_dir + speech, sep_save + next_num + "/" + speech)
+        shutil.move(sep_dir + speech, sep_save + next_num + "_" + file_name + "/" + speech)
 
     return counter
 

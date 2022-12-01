@@ -1,6 +1,14 @@
 import os
+import shutil
 import Diarization as d
 import VoiceClassifier as vc
+
+def createDirectory(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print("Error: Failed to create the directory.")
 
 def evaluate(predicts):
     m_count = 0
@@ -24,7 +32,11 @@ def strix(wav):
     counter["F"] = 0
     counter["C"] = 0
 
+    createDirectory(sep_dir)
+    createDirectory(sep_save)
+
     sep_dir = "../sep/"
+    sep_save = "../sep_result/"
     d.seperation(wav, sep_dir)
     speechs = os.listdir(sep_dir)
 
@@ -39,6 +51,17 @@ def strix(wav):
         for voice in voices:
             predicts.append(vc.voice_classify(voice))
         counter[evaluate(predicts)] += 1
+
+    results = os.listdir(sep_save)
+    next_num = "0"
+    if len(results) != 0:
+        next_num = int(results[-1])
+        next_num += 1
+        next_num = str(next_num)
+
+    os.mkdir(sep_save + next_num)
+    for speech in speechs:
+        shutil.move(sep_dir + speech, sep_save + next_num + "/" + speech)
 
     return counter
 

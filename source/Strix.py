@@ -25,7 +25,7 @@ def strix(wav):
     counter["C"] = 0
 
     sep_dir = "../sep/"
-    #d.seperation(wav, sep_dir)
+    d.seperation(wav, sep_dir)
     speechs = os.listdir(sep_dir)
 
     for speech in speechs:

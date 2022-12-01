@@ -13,5 +13,5 @@ def voice_classify(wav):
     return text_lab[0]
 
 if __name__ == "__main__":
-    path = ""   #wav path needed here
+    path = "../test/audio.wav"   #wav path needed here
     print(voice_classify(path))

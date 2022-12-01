@@ -1,3 +1,5 @@
 .gitignore
 test
 source/__pycache__
+sep_result
+sep

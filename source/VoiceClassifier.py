@@ -11,3 +11,7 @@ def voice_classify(wav):
     output_probs, score, index, text_lab = classifier.classify_batch(signal)
 
     return text_lab[0]
+
+if __name__ == "__main__":
+    path = ""   #wav path needed here
+    print(voice_classify(path))

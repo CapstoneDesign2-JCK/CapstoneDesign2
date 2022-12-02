@@ -15,9 +15,12 @@ def evaluate(predicts):
     f_count = 0
     c_count = 0
 
+    for item in predicts:
+        print(item)
+
     for predict in predicts:
-        if predict == "F": m_count += 1
-        elif predict == "M": f_count += 1
+        if predict == "M": m_count += 1
+        elif predict == "F": f_count += 1
         elif predict == "C": c_count += 1
 
     max_v = max(m_count, f_count, c_count)

@@ -8,5 +8,9 @@ def seperation(wav, save_dir):
 
     for turn, _, speaker in diarization.itertracks(yield_label=True):
         #print(f"start={turn.start:.1f}s stop={turn.end:.1f}s speaker_{speaker}")
-        temp_song = song[turn.start* 1000:turn.end* 1000]
-        temp_song.export(save_dir + speaker + _ + ".wav", format = "wav")
+        start_t = turn.start * 1000
+        end_t = turn.end * 1000
+
+        if end_t - start_t > 100:
+            temp_song = song[start_t:end_t]
+            temp_song.export(save_dir + speaker + _ + ".wav", format = "wav")

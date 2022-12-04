@@ -23,6 +23,12 @@ def home_page():
 # 파일 업로드 처리
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
+
+    old_files = os.listdir("./uploads/")
+    for old_file in old_files:
+        if old_file.split(".")[-1] == "wav":
+            os.remove("./uploads/" + old_file)
+
     if request.method == 'POST':
         f = request.files['file']
         # 저장할 경로 + 파일명
@@ -35,7 +41,14 @@ def result_page():
     return render_template('result.html', result = r)
 
 def analyze_file():
-    passenger = Strix.strix(os.listdir("./uploads/")[0])
+    file = os.listdir("./uploads/")[0]
+    passenger = Strix.strix("./uploads/" + file)
+
+    old_files = os.listdir("./uploads/")
+    for old_file in old_files:
+        if old_file.split(".")[-1] == "wav":
+            os.remove("./uploads/" + old_file)
+            
     return "M: {}, F: {}, C{}".format(passenger["M"], passenger["F"], passenger["C"])
 
 # 서버 실행

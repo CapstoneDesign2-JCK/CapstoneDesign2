@@ -4,3 +4,7 @@ source/__pycache__
 sep_result
 sep
 source/simple.py
+source/templates/tmp
+source/static/images/tick.png
+source/static/images/upload.png
+source/web

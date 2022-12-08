@@ -15,9 +15,6 @@ def evaluate(predicts):
     f_count = 0
     c_count = 0
 
-    for item in predicts:
-        print(item)
-
     for predict in predicts:
         if predict == "M": m_count += 1
         elif predict == "F": f_count += 1
@@ -67,13 +64,13 @@ def strix(wav):
         counter[evaluate(predicts)] += 1
 
     results = os.listdir(sep_save)
-    next_num = "0"
+    next_num = "00"
     if len(results) != 0:
         next_num = int(results[-1].split("_")[0])
         next_num += 1
-        next_num = str(next_num)
-
-    os.mkdir(sep_save + next_num + "_" + file_name)
+        next_num = "{:02d}".format(next_num)
+    if not os.path.exists(sep_save + next_num + '_' + file_name):
+        os.mkdir(sep_save + next_num + '_' + file_name)
     for speech in speechs:
         shutil.move(sep_dir + speech, sep_save + next_num + "_" + file_name + "/" + speech)
 

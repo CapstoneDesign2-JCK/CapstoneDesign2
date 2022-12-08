@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
     .bg-1 {
       background-color: #1B233F;
       color: #ffffff;
@@ -21,12 +22,15 @@
         padding-top: 50px;
         padding-bottom: 50px;
     }
+    .h3 {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
     </style>
 
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Strix</a>
+        <a class="navbar-brand" href="/">Strix</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,7 +40,7 @@
               <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="http://cscp2.sogang.ac.kr/CSE4187/index.php/%EC%9E%AC%EC%B1%84%EA%B9%80" target="_blank">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://github.com/CapstoneDesign2-JCK/CapstoneDesign2" target="_blank">Github</a>
@@ -49,9 +53,9 @@
         <div class="text-center">
             <img src="{{Img}}" class="rounded" alt="Img" style="height: 350px;">
         </div>
-        <br><br>
+        <br>
         <h3>{{Text}}</h3>
-        <br><br>
+        <br>
         <a href="{{Link}}" target="_blank" class="btn btn-outline-secondary" style="color: #ffffff; width: 80px;">Go!</a>
       </div>
       <div class="container-fluid bg-2 text-center" style="height: 5vh; padding-top: 0px; padding-bottom: 10px;">

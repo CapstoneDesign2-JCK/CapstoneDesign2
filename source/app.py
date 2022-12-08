@@ -10,6 +10,8 @@ def analyze_file():
     file = os.listdir("./uploads/")[0]
     passenger = Strix.strix("./uploads/" + file)
 
+    print("Analyze result: M: {}, F: {}, C: {}".format(passenger["M"], passenger["F"], passenger["C"]))
+
     old_files = os.listdir("./uploads/")
     for old_file in old_files:
         if old_file.split(".")[-1] == "wav":
